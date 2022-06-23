@@ -1,0 +1,54 @@
+#---------------------------------------------------#
+# FACTORED REGRESSION WITH CROSS-LEVEL INTERACTIONS
+#
+# Bayesian analysis with Positive df Prior and
+#  Between-Cluster Interaction via 
+#  Joint Specification
+#
+#---------------------------------------------------#
+
+# Read Data in
+DATA: employee.dat;
+
+# List Variable Names
+VARIABLES: 
+	employee team turnover male empower
+	lmx jobsat climate cohesion;
+
+# Specify Clustering Variable
+CLUSTERID:	team;
+
+# Specify Missing Data Code
+MISSING: 999;
+
+# Specify no distribution for male (complete)
+FIXED: male;
+
+# Bayesian Grand and Group mean centering
+CENTER: 
+	groupmean = lmx;
+	grandmean = climate lmx.mean;
+
+# Fit regression of empower on variables with random slope for lmx
+MODEL: 
+	empower ~ lmx lmx.mean climate lmx*climate 
+				lmx.mean*climate male cohesion | lmx;
+
+# Compute simple slope analysis for lmx moderated by climate
+SIMPLE: 
+	lmx | climate;
+
+## Specify Algorithmic options
+SEED: 1234128;		# PRNG Seeding
+BURN: 20000;		# Set number of burn iterations
+ITERATIONS: 20000;	# Set number of post-burn iterations
+OPTIONS:  prior1;	# Set prior1 (Positive df prior)
+
+## Specify Imputations to Save
+NIMPS: 100;			# Save 100 Imputed data sets equally spaced
+SAVE: 				# Save imputations in single stacked file
+	stacked = imps.prior1.csv;
+OPTIONS: 
+	saveLatent;		# Request saving latent means
+	saveVarNames;	# Save Variable names as header
+

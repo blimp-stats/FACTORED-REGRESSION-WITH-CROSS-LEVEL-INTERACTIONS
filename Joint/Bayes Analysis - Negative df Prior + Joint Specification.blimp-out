@@ -1,0 +1,266 @@
+
+---------------------------------------------------------------------------
+
+                                   Blimp
+                                  3.0.63
+
+             Blimp was developed with funding from Institute of
+          Educational Sciences awards R305D150056 and R305D190002.
+
+            Craig K. Enders, P.I. Email: cenders@psych.ucla.edu
+              Brian T. Keller, Co-P.I. Email: blimp@utexas.edu
+                 Han Du, Co-P.I. Email: hdu@psych.ucla.edu
+                 Roy Levy, Co-P.I. Email: roy.levy@asu.edu
+
+              Programming and Blimp Studio by Brian T. Keller
+
+                   There is no expressed license given.
+
+---------------------------------------------------------------------------
+
+
+ALGORITHMIC OPTIONS SPECIFIED:
+
+  Imputation method:                 Fully Bayesian model-based
+  MCMC algorithm:                    Full conditional Metropolis sampler
+  Between-cluster imputation model:  Latent cluster means (LATENT)
+  Residual variance structure:       Homogeneous level-1 variance (HOV)
+  Prior for random effect variances: Zero matrix, df = -(p + 1) (PRIOR2)
+  Prior for residual variances:      Zero sum of squares, df = -2 (PRIOR2)
+  Prior for predictor variances:     Unit sum of squares, df = 2 (XPRIOR1)
+  Chain Starting Values:             Random starting values
+
+
+
+BURN-IN POTENTIAL SCALE REDUCTION (PSR) OUTPUT:
+
+  NOTE: Split chain PSR is being used. This splits each chain's
+        iterations to create twice as many chains.
+
+  Comparing iterations across 2 chains     Highest PSR   Parameter #  
+                          501 to 1000            1.452             2  
+                         1001 to 2000            1.145            21  
+                         1501 to 3000            1.045             2  
+                         2001 to 4000            1.038             1  
+                         2501 to 5000            1.052             2  
+                         3001 to 6000            1.030             1  
+                         3501 to 7000            1.021             2  
+                         4001 to 8000            1.022             1  
+                         4501 to 9000            1.021            29  
+                         5001 to 10000           1.016             7  
+                         5501 to 11000           1.011            29  
+                         6001 to 12000           1.016             2  
+                         6501 to 13000           1.013            21  
+                         7001 to 14000           1.020             1  
+                         7501 to 15000           1.012             1  
+                         8001 to 16000           1.014             1  
+                         8501 to 17000           1.010             1  
+                         9001 to 18000           1.013             1  
+                         9501 to 19000           1.011             1  
+                        10001 to 20000           1.011            22  
+
+
+METROPOLIS-HASTINGS ACCEPTANCE RATES:
+
+  Chain 1:
+    Variable                            Type    Probability   Target Value 
+    climate                        parameter          0.444          0.500 
+
+  Chain 2:
+    Variable                            Type    Probability   Target Value 
+
+
+  NOTE: Suppressing printing of tuning info that is within
+        +/- 0.05 of the target acceptance probability.
+        Use keyword 'tuneinfo' in options to override.
+
+
+DATA INFORMATION:
+
+  Level-2 identifier:       team
+  Sample Size:              630
+  Level-2 Clusters:         105
+  Missing Data Rates:
+
+                  empower = 16.19
+                      lmx = 04.13
+                  climate = 09.52
+                 cohesion = 05.71
+
+
+
+MODEL INFORMATION:
+
+  NUMBER OF PARAMETERS
+    Outcome Models:         12
+    Predictor Models:       14
+
+  PREDICTORS
+    Fixed variables:        male
+    Incomplete continuous:  lmx climate cohesion
+
+  CENTERED PREDICTORS
+    Grand Mean Centered:    climate
+    Group Mean Centered:    lmx
+
+  LATENT CLUSTER MEANS
+    Grand Mean Centered:    lmx
+
+  MODELS
+    [1]  empower ~ Intercept lmx lmx.mean[team] climate male cohesion lmx*climate 
+                 lmx.mean[team]*climate | Intercept lmx
+
+
+WARNING MESSAGES:
+
+  WARNING: One or more tuning parameters had a suboptimal acceptance probability.
+           See METROPOLIS-HASTINGS ACCEPTANCE RATES section.
+
+
+OUTCOME MODEL ESTIMATES:
+
+  Summaries based on 20000 iterations using 2 chains.
+
+
+Outcome Variable:  empower    
+
+Grand Mean Centered: climate lmx.mean[team]
+Group Mean Centered: lmx
+
+
+Parameters                           Median     StdDev       2.5%      97.5%        PSR      N_Eff 
+                                -------------------------------------------------------------------
+Variances:                      
+  L2 : Var(Intercept)                 0.858      0.553      0.072      2.248      1.004    246.377 
+  L2 : Cov(lmx,Intercept)            -0.039      0.156     -0.342      0.285      1.002    523.276 
+  L2 : Var(lmx)                       0.184      0.089      0.049      0.394      1.005    521.620 
+  Residual Var.                      12.043      0.907     10.419     13.991      1.001   2778.417 
+
+Coefficients:                   
+  Intercept                          26.823      0.936     25.022     28.692      1.000   2899.786 
+  lmx                                 0.657      0.082      0.494      0.816      1.001   3670.629 
+  lmx.mean[team]                      0.138      0.349     -0.650      0.743      1.001    773.564 
+  climate                             0.204      0.063      0.080      0.326      1.000   2731.679 
+  male                                1.714      0.331      1.070      2.368      1.000  10187.197 
+  cohesion                            0.200      0.181     -0.163      0.553      1.000   2711.492 
+  lmx*climate                         0.040      0.019      0.002      0.078      1.000   3454.621 
+  lmx.mean[team]*climate             -0.024      0.078     -0.184      0.129      1.003   1159.199 
+
+Standardized Coefficients:      
+  lmx                                 0.409      0.045      0.315      0.491      1.001   3057.165 
+  lmx.mean[team]                      0.031      0.071     -0.114      0.164      1.001    828.352 
+  climate                             0.184      0.056      0.071      0.290      1.000   2681.950 
+  male                                0.188      0.036      0.117      0.257      1.000   9340.590 
+  cohesion                            0.059      0.053     -0.048      0.163      1.000   2706.904 
+  lmx*climate                         0.106      0.050      0.006      0.204      1.000   3453.913 
+  lmx.mean[team]*climate             -0.021      0.063     -0.137      0.107      1.003   1274.968 
+
+Proportion Variance Explained   
+  by Coefficients                     0.301      0.038      0.225      0.375      1.000   3811.874 
+  by Level-2 Random Intercepts        0.041      0.026      0.004      0.104      1.004    234.866 
+  by Level-2 Random Slopes            0.072      0.033      0.019      0.146      1.005    495.147 
+  by Level-1 Residual Variation       0.580      0.044      0.493      0.666      1.003   1263.052 
+
+                                -------------------------------------------------------------------
+
+
+
+Conditional Effects                  Median     StdDev       2.5%      97.5%        PSR      N_Eff 
+                                -------------------------------------------------------------------
+  lmx | climate @ +2 SD                                                                            
+    Intercept                        28.518      1.303     25.989     31.125      1.000   2656.248 
+    Slope                             0.988      0.180      0.637      1.349      1.000   3799.126 
+                                                                                                   
+  lmx | climate @ +1 SD                                                                            
+    Intercept                        27.669      1.101     25.548     29.866      1.000   2733.544 
+    Slope                             0.823      0.114      0.601      1.051      1.000   3885.297 
+                                                                                                   
+  lmx | climate @ 0                                                                                
+    Intercept                        26.823      0.936     25.022     28.692      1.000   2899.786 
+    Slope                             0.657      0.082      0.494      0.816      1.001   3670.629 
+                                                                                                   
+  lmx | climate @ -1 SD                                                                            
+    Intercept                        25.980      0.829     24.369     27.630      1.000   3257.759 
+    Slope                             0.492      0.115      0.261      0.713      1.001   3505.632 
+                                                                                                   
+  lmx | climate @ -2 SD                                                                            
+    Intercept                        25.132      0.804     23.560     26.716      1.000   3772.451 
+    Slope                             0.325      0.182     -0.039      0.675      1.001   3530.878 
+                                                                                                   
+                                -------------------------------------------------------------------
+
+                                NOTE: Intercepts are computed by setting all predictors
+                                      not involved in the conditional effect to zero.
+
+                                NOTE: Standard deviation units are determined by
+                                      centering. Group mean centering uses a within-
+                                      cluster standard deviation, and grand mean
+                                      centering uses a total standard deviation.
+
+
+
+
+PREDICTOR MODEL ESTIMATES:
+
+  Summaries based on 20000 iterations using 2 chains.
+
+
+Missing predictor:  lmx        
+
+Parameters                           Median     StdDev       2.5%      97.5%        PSR      N_Eff 
+                                -------------------------------------------------------------------
+
+Grand Mean                            9.627      0.153      9.324      9.917      1.002   1070.565 
+
+Level 1:                                                                                           
+  male                                0.402      0.241     -0.071      0.875      1.000  10476.979 
+  Residual Var.                       7.998      0.516      7.075      9.084      1.001   2427.450 
+
+Level 2:                                                                                           
+  climate                             0.022      0.042     -0.060      0.102      1.000   1802.728 
+  cohesion                           -0.084      0.130     -0.344      0.168      1.001   1330.463 
+  Residual Var.                       1.003      0.371      0.365      1.825      1.003    504.101 
+                                                                                                   
+                                -------------------------------------------------------------------
+
+
+
+Missing predictor:  climate    
+
+Parameters                           Median     StdDev       2.5%      97.5%        PSR      N_Eff 
+                                -------------------------------------------------------------------
+
+Grand Mean                           20.114      0.421     19.281     20.936      1.002   1883.195 
+
+Level 2:                                                                                           
+  lmx                                 0.299      0.649     -0.904      1.653      1.000   1318.754 
+  cohesion                            1.348      0.299      0.764      1.938      1.000   7315.501 
+  Residual Var.                      13.408      2.073     10.152     18.169      1.000   9183.147 
+                                                                                                   
+                                -------------------------------------------------------------------
+
+
+
+Missing predictor:  cohesion   
+
+Parameters                           Median     StdDev       2.5%      97.5%        PSR      N_Eff 
+                                -------------------------------------------------------------------
+
+Grand Mean                            4.907      0.138      4.634      5.177      1.000   6438.591 
+
+Level 2:                                                                                           
+  lmx                                -0.127      0.216     -0.597      0.274      1.001   1026.971 
+  climate                             0.146      0.032      0.083      0.207      1.000  10417.122 
+  Residual Var.                       1.467      0.226      1.098      1.985      1.000   8203.881 
+                                                                                                   
+                                -------------------------------------------------------------------
+
+
+
+VARIABLE ORDER IN IMPUTED DATA:
+
+   stacked = 'imps.prior2.csv'
+
+     imp# employee team turnover male empower lmx jobsat climate cohesion empower[team]
+     empower$lmx[team] lmx.mean[team]
+

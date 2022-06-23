@@ -1,0 +1,97 @@
+#---------------------------------------------------#
+# FACTORED REGRESSION WITH CROSS-LEVEL INTERACTIONS
+#
+# Bayesian analysis with Separate prior and
+#  Between-Cluster Interaction via 
+#  Sequential Specification
+#
+#---------------------------------------------------#
+
+# Read Data in
+DATA: employee.dat;
+
+# List Variable Names
+VARIABLES: 
+	employee team turnover male empower
+	lmx jobsat climate cohesion;
+
+# Specify Clustering Variable
+CLUSTERID:	team;
+
+# Specify Missing Data Code
+MISSING: 999;
+
+# Request Latent Varaible at team-level named "beta_1j"
+LATENT:
+	team = beta_1j;
+
+# Bayesian Grand and Group mean centering
+CENTER: 
+	groupmean = lmx;
+	grandmean = climate lmx.mean;
+
+# Create a variable name (beta_0j) to reference 
+#  "empower" random intercept at level "team"
+RANDOMEFFECT:
+	beta_0j = empower | Intercept [team];
+
+
+# Fit regression of empower on variables with random slope for lmx
+MODEL:
+	# Specify Empower model
+	empower ~ lmx*beta_1j@1	# Fix beta1j*lmx interaction to one.
+				lmx.mean climate lmx*climate 
+				lmx.mean*climate male cohesion
+				| 1@i_var;	# Label intercept variance (i_var)
+
+	# Estimate intercept for beta1j (represents beta_1 coefficient).
+	beta_1j ~ 1; 
+
+	# Label slope variance (s_var) 
+	beta_1j ~~ beta_1j@s_var; 
+
+	# Estimate correlation between random intercept and slope
+	# empower[team] references "empower" at the "team" level
+	beta_0j ~~ beta_1j@corr;
+
+	# Fit Sequential Predictor Models
+	# male has very little level-2 variability so set no random intercept (0);
+	male ~ lmx climate cohesion | 0;
+
+	# Automatically specifies the following models	with one line
+	#  lmx      ~ climate cohesion;
+	#  climate  ~ cohesion;
+	#  cohesion ~ 1;
+	lmx climate cohesion ~ 1;
+
+# Post compute parameters using model parameters
+PARAMETERS:
+	# Compute the covariance based on correlation and varainces
+	covariance = corr * sqrt(s_var * i_var);
+
+	# Compute Rights & Sterba (2019) R-square Effect Sizes
+	#  not automatically computed for separation prior.
+	#  Adding a '.totalvar' after variable name returns
+	#  model implied total variance for the variable.
+	#  Adding a '.residvar' returns the residual variance.
+
+	r2_slope = (s_var*lmx.totalvar) / empower.totalvar;
+	r2_icept = i_var / empower.totalvar;
+	r2_resid = empower.residvar / empower.totalvar;
+	r2_fixed = 1.0 - (r2_slope + r2_resid + r2_icept);
+
+
+## Specify Algorithmic options
+SEED: 698231;		# PRNG Seeding
+BURN: 20000;		# Set number of burn iterations
+ITERATIONS: 20000;	# Set number of post-burn iterations
+OPTIONS:  prior1;	# Set prior1 (Positive df prior)
+
+## Specify Imputations to Save
+NIMPS: 100;			# Save 100 Imputed data sets equally spaced
+SAVE: 				# Save imputations in single stacked file
+	stacked = imps.priorsep.csv;
+OPTIONS: 
+	saveLatent;		# Request saving latent means
+	saveVarNames;	# Save Variable names as header
+
