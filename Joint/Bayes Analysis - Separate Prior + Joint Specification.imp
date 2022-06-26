@@ -24,7 +24,7 @@ MISSING: 999;
 # Specify no distribution for male (complete)
 FIXED: male;
 
-# Request Latent Varaible at team-level named "beta_1j"
+# Request Latent Variable at team-level named "beta_1j"
 LATENT:
 	team = beta_1j;
 
