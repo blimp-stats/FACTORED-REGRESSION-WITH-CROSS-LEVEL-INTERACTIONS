@@ -21,7 +21,7 @@ CLUSTERID:	team;
 # Specify Missing Data Code
 MISSING: 999;
 
-# Request Latent Varaible at team-level named "beta_1j"
+# Request Latent Variable at team-level named "beta_1j"
 LATENT:
 	team = beta_1j;
 
