@@ -42,7 +42,7 @@ RANDOMEFFECT:
 # Fit regression of empower on variables with random slope for lmx
 MODEL:
 	# Specify Empower model
-	empower ~ lmx*beta_1j@1	# Fix beta1j*lmx interaction to one.
+	empower ~ lmx@beta_1j	# Specify random slope using latent variable.
 				lmx.mean climate lmx*climate 
 				lmx.mean*climate male cohesion
 				| 1@i_var;	# Label intercept variance (i_var)
@@ -90,4 +90,5 @@ SAVE: 				# Save imputations in single stacked file
 OPTIONS: 
 	saveLatent;		# Request saving latent means
 	saveVarNames;	# Save Variable names as header
+	use_phantom;    # Use phantom variable for correlation.
 

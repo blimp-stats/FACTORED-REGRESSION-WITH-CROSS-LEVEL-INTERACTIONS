@@ -2,13 +2,13 @@
 ---------------------------------------------------------------------------
 
                                    Blimp
-                                  3.0.63
+                                   3.2.1
 
              Blimp was developed with funding from Institute of
           Educational Sciences awards R305D150056 and R305D190002.
 
             Craig K. Enders, P.I. Email: cenders@psych.ucla.edu
-              Brian T. Keller, Co-P.I. Email: blimp@utexas.edu
+           Brian T. Keller, Co-P.I. Email: btkeller@missouri.edu
                  Han Du, Co-P.I. Email: hdu@psych.ucla.edu
                  Roy Levy, Co-P.I. Email: roy.levy@asu.edu
 
@@ -22,7 +22,8 @@
 ALGORITHMIC OPTIONS SPECIFIED:
 
   Imputation method:                 Fully Bayesian model-based
-  MCMC algorithm:                    Full conditional Metropolis sampler
+  MCMC algorithm:                    Full conditional Metropolis sampler with
+                                       Auto-Derived Conditional Distributions
   Between-cluster imputation model:  Latent cluster means (LATENT)
   Residual variance structure:       Homogeneous level-1 variance (HOV)
   Prior for random effect variances: Zero matrix, df = -(p + 1) (PRIOR2)
@@ -38,26 +39,26 @@ BURN-IN POTENTIAL SCALE REDUCTION (PSR) OUTPUT:
         iterations to create twice as many chains.
 
   Comparing iterations across 2 chains     Highest PSR   Parameter #  
-                          501 to 1000            1.091            17  
-                         1001 to 2000            1.099            56  
-                         1501 to 3000            1.054            12  
-                         2001 to 4000            1.040            56  
-                         2501 to 5000            1.031            13  
-                         3001 to 6000            1.036            31  
-                         3501 to 7000            1.022            56  
-                         4001 to 8000            1.022            32  
-                         4501 to 9000            1.018            56  
-                         5001 to 10000           1.022            56  
-                         5501 to 11000           1.016            56  
-                         6001 to 12000           1.016            13  
-                         6501 to 13000           1.013            32  
-                         7001 to 14000           1.020            11  
-                         7501 to 15000           1.019            11  
-                         8001 to 16000           1.013            11  
-                         8501 to 17000           1.010            32  
-                         9001 to 18000           1.012            32  
-                         9501 to 19000           1.006            12  
-                        10001 to 20000           1.013            31  
+                          501 to 1000            1.096            56  
+                         1001 to 2000            1.068            11  
+                         1501 to 3000            1.105            31  
+                         2001 to 4000            1.050            12  
+                         2501 to 5000            1.038            31  
+                         3001 to 6000            1.015            12  
+                         3501 to 7000            1.009            11  
+                         4001 to 8000            1.008            11  
+                         4501 to 9000            1.011            31  
+                         5001 to 10000           1.017            11  
+                         5501 to 11000           1.005            32  
+                         6001 to 12000           1.008            56  
+                         6501 to 13000           1.009            56  
+                         7001 to 14000           1.009            11  
+                         7501 to 15000           1.008            31  
+                         8001 to 16000           1.016            11  
+                         8501 to 17000           1.007            11  
+                         9001 to 18000           1.007            31  
+                         9501 to 19000           1.007            12  
+                        10001 to 20000           1.012            31  
 
 
 METROPOLIS-HASTINGS ACCEPTANCE RATES:
@@ -65,12 +66,11 @@ METROPOLIS-HASTINGS ACCEPTANCE RATES:
   Chain 1:
 
     Variable                            Type    Probability   Target Value 
-    climate                       imputation          0.500          0.500 
-    cohesion                      imputation          0.494          0.500 
-    lmx                           imputation          0.509          0.500 
-    lmx                           latent imp          0.503          0.500 
-    lmx                            parameter          0.495          0.500 
-    climate                        parameter          0.521          0.500 
+    climate                       imputation          0.494          0.500 
+    lmx                           imputation          0.491          0.500 
+    lmx                           latent imp          0.505          0.500 
+    lmx                            parameter          0.478          0.500 
+    climate                        parameter          0.485          0.500 
 
   NOTE: Suppressing printing of 1 chains.
         Use keyword 'tuneinfo' in options to override.
@@ -118,6 +118,49 @@ WARNING MESSAGES:
   No warning messages.
 
 
+MODEL FIT:
+
+
+  INFORMATION CRITERIA
+
+    Marginal Likelihood
+      DIC2                  8518.833
+      WAIC                  8580.648
+
+    Conditional Likelihood
+      DIC2                  8417.205
+      WAIC                  8524.914
+
+
+CORRELATIONS AMONG RESIDUALS:
+
+  Summaries based on 20000 iterations using 2 chains.
+
+
+   Level-1:
+
+Correlations                         Median     StdDev       2.5%      97.5%        PSR      N_Eff 
+                                -------------------------------------------------------------------
+
+  empower, lmx                        0.001      0.056     -0.110      0.110      1.000  17939.779 
+  empower, male                       0.000      0.057     -0.110      0.112      1.000  19095.006 
+  lmx, male                          -0.003      0.056     -0.113      0.107      1.000  17126.022 
+
+                                -------------------------------------------------------------------
+
+
+
+   Level-2:
+
+Correlations                         Median     StdDev       2.5%      97.5%        PSR      N_Eff 
+                                -------------------------------------------------------------------
+
+  climate, cohesion                   0.000      0.138     -0.268      0.272      1.000  19810.558 
+
+                                -------------------------------------------------------------------
+
+
+
 OUTCOME MODEL ESTIMATES:
 
   Summaries based on 20000 iterations using 2 chains.
@@ -128,18 +171,18 @@ Outcome Variable:  climate
 Parameters                           Median     StdDev       2.5%      97.5%        PSR      N_Eff 
                                 -------------------------------------------------------------------
 Variances:                      
-  Residual Var.                      13.934      2.153     10.576     18.959      1.000   9461.751 
+  Residual Var.                      13.956      2.158     10.554     19.011      1.000  11966.647 
 
 Coefficients:                   
-  Intercept                          13.560      1.493     10.656     16.497      1.000  10649.119 
-  cohesion                            1.333      0.295      0.750      1.904      1.000   9942.042 
+  Intercept                          13.530      1.493     10.624     16.467      1.000  11369.712 
+  cohesion                            1.338      0.296      0.753      1.913      1.000  10839.846 
 
 Standardized Coefficients:      
-  cohesion                            0.435      0.083      0.255      0.577      1.000   9640.302 
+  cohesion                            0.437      0.082      0.255      0.577      1.000  11345.393 
 
 Proportion Variance Explained   
-  by Coefficients                     0.189      0.069      0.065      0.332      1.000   9720.863 
-  by Residual Variation               0.811      0.069      0.668      0.935      1.000   9720.863 
+  by Coefficients                     0.191      0.069      0.065      0.332      1.000  11381.763 
+  by Residual Variation               0.809      0.069      0.668      0.935      1.000  11381.763 
 
                                 -------------------------------------------------------------------
 
@@ -150,10 +193,10 @@ Outcome Variable:  cohesion
 Parameters                           Median     StdDev       2.5%      97.5%        PSR      N_Eff 
                                 -------------------------------------------------------------------
 Variances:                      
-  Residual Var.                       1.849      0.271      1.417      2.468      1.000  14998.316 
+  Residual Var.                       1.851      0.272      1.411      2.476      1.000  18103.483 
 
 Coefficients:                   
-  Intercept                           4.908      0.136      4.642      5.176      1.000  13425.282 
+  Intercept                           4.909      0.137      4.640      5.182      1.000  18006.464 
 
 Proportion Variance Explained   
   by Coefficients                     0.000      0.000      0.000      0.000        nan        nan 
@@ -172,35 +215,35 @@ Group Mean Centered: lmx
 Parameters                           Median     StdDev       2.5%      97.5%        PSR      N_Eff 
                                 -------------------------------------------------------------------
 Variances:                      
-  L2 : Var(Intercept)                 0.806      0.542      0.106      2.169      1.013    288.195 
-  L2 : Cov(lmx,Intercept)            -0.068      0.155     -0.370      0.248      1.016    301.926 
-  L2 : Var(lmx)                       0.189      0.092      0.053      0.401      1.002    702.970 
-  Residual Var.                      12.011      0.901     10.416     13.955      1.001   2243.588 
+  L2 : Var(Intercept)                 0.742      0.568      0.084      2.171      1.003    190.752 
+  L2 : Cov(lmx,Intercept)            -0.075      0.161     -0.376      0.264      1.017    169.852 
+  L2 : Var(lmx)                       0.190      0.091      0.046      0.404      1.017    415.538 
+  Residual Var.                      12.049      0.904     10.426     13.976      1.004   1682.819 
 
 Coefficients:                   
-  Intercept                          26.734      0.868     25.061     28.462      1.000   4554.747 
-  lmx                                 0.662      0.082      0.499      0.821      1.001   3284.363 
-  lmx.mean[team]                      0.146      0.313     -0.550      0.711      1.004    896.132 
-  climate                             0.198      0.059      0.082      0.313      1.000   3849.625 
-  male                                1.696      0.331      1.045      2.343      1.000   9206.867 
-  cohesion                            0.220      0.167     -0.109      0.547      1.000   4873.998 
-  lmx*climate                         0.042      0.019      0.004      0.080      1.000   3639.346 
-  lmx.mean[team]*climate             -0.032      0.073     -0.185      0.108      1.000   1636.721 
+  Intercept                          26.746      0.879     25.039     28.465      1.002   4537.872 
+  lmx                                 0.659      0.082      0.495      0.817      1.000   3045.262 
+  lmx.mean[team]                      0.117      0.338     -0.617      0.718      1.003    816.034 
+  climate                             0.199      0.059      0.082      0.313      1.002   3688.076 
+  male                                1.693      0.330      1.041      2.340      1.001  10759.459 
+  cohesion                            0.218      0.169     -0.110      0.550      1.001   4986.745 
+  lmx*climate                         0.042      0.019      0.005      0.080      1.000   3573.488 
+  lmx.mean[team]*climate             -0.035      0.078     -0.204      0.112      1.001   1318.486 
 
 Standardized Coefficients:      
-  lmx                                 0.412      0.045      0.317      0.493      1.001   2771.966 
-  lmx.mean[team]                      0.032      0.066     -0.099      0.158      1.004    913.018 
-  climate                             0.178      0.052      0.073      0.279      1.000   3744.132 
-  male                                0.186      0.036      0.115      0.255      1.000   8252.268 
-  cohesion                            0.065      0.049     -0.033      0.161      1.000   4861.177 
-  lmx*climate                         0.111      0.050      0.012      0.209      1.000   3710.331 
-  lmx.mean[team]*climate             -0.028      0.059     -0.141      0.092      1.001   1600.163 
+  lmx                                 0.411      0.045      0.315      0.494      1.001   2618.226 
+  lmx.mean[team]                      0.025      0.067     -0.106      0.157      1.003    829.478 
+  climate                             0.179      0.053      0.073      0.280      1.001   3595.045 
+  male                                0.186      0.036      0.115      0.255      1.001   9481.395 
+  cohesion                            0.065      0.050     -0.033      0.161      1.001   4929.535 
+  lmx*climate                         0.112      0.050      0.013      0.209      1.000   3637.661 
+  lmx.mean[team]*climate             -0.030      0.060     -0.146      0.093      1.001   1490.943 
 
 Proportion Variance Explained   
-  by Coefficients                     0.304      0.039      0.227      0.378      1.001   3010.503 
-  by Level-2 Random Intercepts        0.038      0.025      0.005      0.101      1.014    279.183 
-  by Level-2 Random Slopes            0.073      0.033      0.021      0.148      1.002    683.154 
-  by Level-1 Residual Variation       0.578      0.045      0.490      0.667      1.003    827.152 
+  by Coefficients                     0.303      0.039      0.227      0.379      1.001   3269.384 
+  by Level-2 Random Intercepts        0.036      0.026      0.004      0.101      1.003    183.415 
+  by Level-2 Random Slopes            0.074      0.033      0.018      0.149      1.016    464.132 
+  by Level-1 Residual Variation       0.581      0.046      0.491      0.671      1.011    411.453 
 
                                 -------------------------------------------------------------------
 
@@ -214,22 +257,22 @@ Grand Mean Centered: climate
 Parameters                           Median     StdDev       2.5%      97.5%        PSR      N_Eff 
                                 -------------------------------------------------------------------
 Variances:                      
-  L2 : Var(Intercept)                 1.342      0.404      0.692      2.270      1.001   2214.234 
-  Residual Var.                       7.920      0.505      7.016      8.998      1.000   8144.856 
+  L2 : Var(Intercept)                 1.377      0.413      0.707      2.318      1.000   2571.892 
+  Residual Var.                       7.903      0.497      6.993      8.946      1.000   9133.494 
 
 Coefficients:                   
-  Intercept                          10.148      0.698      8.764     11.511      1.000   4633.550 
-  climate                             0.034      0.046     -0.057      0.124      1.001   4471.445 
-  cohesion                           -0.106      0.138     -0.373      0.168      1.000   4579.906 
+  Intercept                          10.146      0.709      8.775     11.518      1.000   5207.380 
+  climate                             0.035      0.046     -0.055      0.126      1.002   4450.047 
+  cohesion                           -0.107      0.140     -0.380      0.167      1.000   5058.435 
 
 Standardized Coefficients:      
-  climate                             0.046      0.062     -0.076      0.164      1.001   4505.830 
-  cohesion                           -0.047      0.060     -0.163      0.073      1.000   4601.433 
+  climate                             0.047      0.061     -0.074      0.166      1.002   4433.466 
+  cohesion                           -0.047      0.061     -0.165      0.073      1.000   5077.503 
 
 Proportion Variance Explained   
-  by Coefficients                     0.006      0.008      0.000      0.029      1.000   6033.764 
-  by Level-2 Random Intercepts        0.144      0.039      0.076      0.226      1.001   2131.847 
-  by Level-1 Residual Variation       0.848      0.039      0.764      0.918      1.001   2182.072 
+  by Coefficients                     0.006      0.008      0.000      0.030      1.000   6002.351 
+  by Level-2 Random Intercepts        0.147      0.039      0.078      0.231      1.000   2519.883 
+  by Level-1 Residual Variation       0.844      0.040      0.759      0.916      1.000   2526.228 
 
                                 -------------------------------------------------------------------
 
@@ -244,22 +287,22 @@ Group Mean Centered: lmx
 Parameters                           Median     StdDev       2.5%      97.5%        PSR      N_Eff 
                                 -------------------------------------------------------------------
 Variances:                      
-  Residual Var.                       0.248      0.014      0.223      0.278      1.000  19688.945 
+  Residual Var.                       0.248      0.014      0.222      0.278      1.000  19088.023 
 
 Coefficients:                   
-  Intercept                           0.460      0.085      0.289      0.628      1.000  15532.445 
-  lmx                                 0.012      0.007     -0.002      0.026      1.000  11594.548 
-  climate                             0.012      0.006      0.001      0.023      1.000  11384.333 
-  cohesion                            0.005      0.017     -0.028      0.038      1.000  15876.895 
+  Intercept                           0.461      0.086      0.293      0.627      1.000  15264.505 
+  lmx                                 0.012      0.007     -0.002      0.027      1.000  12966.660 
+  climate                             0.012      0.006      0.001      0.023      1.000  11823.014 
+  cohesion                            0.005      0.017     -0.028      0.038      1.000  15709.088 
 
 Standardized Coefficients:      
-  lmx                                 0.068      0.042     -0.014      0.148      1.000  11193.343 
-  climate                             0.099      0.046      0.008      0.190      1.000  10857.933 
-  cohesion                            0.014      0.045     -0.075      0.102      1.000  15801.070 
+  lmx                                 0.069      0.041     -0.012      0.149      1.000  12653.528 
+  climate                             0.100      0.047      0.007      0.191      1.000  11429.234 
+  cohesion                            0.013      0.045     -0.075      0.101      1.000  15697.882 
 
 Proportion Variance Explained   
-  by Coefficients                     0.020      0.011      0.004      0.047      1.000  12724.721 
-  by Residual Variation               0.980      0.011      0.953      0.996      1.000  12724.721 
+  by Coefficients                     0.020      0.011      0.004      0.047      1.000  13844.868 
+  by Residual Variation               0.980      0.011      0.953      0.996      1.000  13844.868 
 
                                 -------------------------------------------------------------------
 
@@ -279,13 +322,13 @@ Means Model:        lmx
 Parameters                           Median     StdDev       2.5%      97.5%        PSR      N_Eff 
                                 -------------------------------------------------------------------
 
-Grand Mean                            9.615      0.153      9.327      9.922      1.004   1192.216 
+Grand Mean                            9.622      0.152      9.322      9.922      1.003    992.700 
 
 Level 1:                                                                                           
-  Residual Var.                       8.029      0.509      7.111      9.092      1.000   3211.408 
+  Residual Var.                       8.060      0.526      7.112      9.164      1.001   2197.377 
 
 Level 2:                                                                                           
-  Residual Var.                       1.009      0.352      0.460      1.817      1.004    554.652 
+  Residual Var.                       0.949      0.363      0.382      1.793      1.001    487.467 
                                                                                                    
                                 -------------------------------------------------------------------
 
@@ -299,10 +342,10 @@ Means Model:        climate
 Parameters                           Median     StdDev       2.5%      97.5%        PSR      N_Eff 
                                 -------------------------------------------------------------------
 
-Grand Mean                           20.118      0.412     19.303     20.938      1.000   2238.530 
+Grand Mean                           20.105      0.427     19.270     20.945      1.001   2332.235 
 
 Level 2:                                                                                           
-  Residual Var.                      16.809      2.567     12.812     22.805      1.000  10511.453 
+  Residual Var.                      16.863      2.581     12.743     22.913      1.000  11101.376 
                                                                                                    
                                 -------------------------------------------------------------------
 

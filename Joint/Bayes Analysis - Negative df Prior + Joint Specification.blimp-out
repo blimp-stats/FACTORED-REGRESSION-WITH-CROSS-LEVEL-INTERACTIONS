@@ -2,13 +2,13 @@
 ---------------------------------------------------------------------------
 
                                    Blimp
-                                  3.0.63
+                                   3.2.1
 
              Blimp was developed with funding from Institute of
           Educational Sciences awards R305D150056 and R305D190002.
 
             Craig K. Enders, P.I. Email: cenders@psych.ucla.edu
-              Brian T. Keller, Co-P.I. Email: blimp@utexas.edu
+           Brian T. Keller, Co-P.I. Email: btkeller@missouri.edu
                  Han Du, Co-P.I. Email: hdu@psych.ucla.edu
                  Roy Levy, Co-P.I. Email: roy.levy@asu.edu
 
@@ -22,7 +22,8 @@
 ALGORITHMIC OPTIONS SPECIFIED:
 
   Imputation method:                 Fully Bayesian model-based
-  MCMC algorithm:                    Full conditional Metropolis sampler
+  MCMC algorithm:                    Full conditional Metropolis sampler with
+                                       Auto-Derived Conditional Distributions
   Between-cluster imputation model:  Latent cluster means (LATENT)
   Residual variance structure:       Homogeneous level-1 variance (HOV)
   Prior for random effect variances: Zero matrix, df = -(p + 1) (PRIOR2)
@@ -63,15 +64,16 @@ BURN-IN POTENTIAL SCALE REDUCTION (PSR) OUTPUT:
 METROPOLIS-HASTINGS ACCEPTANCE RATES:
 
   Chain 1:
+
     Variable                            Type    Probability   Target Value 
+    lmx                           imputation          0.504          0.500 
+    lmx                           latent imp          0.502          0.500 
+    lmx                            parameter          0.506          0.500 
+    climate                       imputation          0.487          0.500 
     climate                        parameter          0.444          0.500 
+    cohesion                      imputation          0.520          0.500 
 
-  Chain 2:
-    Variable                            Type    Probability   Target Value 
-
-
-  NOTE: Suppressing printing of tuning info that is within
-        +/- 0.05 of the target acceptance probability.
+  NOTE: Suppressing printing of 1 chains.
         Use keyword 'tuneinfo' in options to override.
 
 
@@ -113,8 +115,27 @@ MODEL INFORMATION:
 
 WARNING MESSAGES:
 
-  WARNING: One or more tuning parameters had a suboptimal acceptance probability.
-           See METROPOLIS-HASTINGS ACCEPTANCE RATES section.
+  No warning messages.
+
+
+MODEL FIT:
+
+
+  INFORMATION CRITERIA
+
+    Marginal Likelihood
+      DIC2                  3490.088
+      WAIC                  3534.836
+
+    Conditional Likelihood
+      DIC2                  3434.506
+      WAIC                  3503.511
+
+
+CORRELATIONS AMONG RESIDUALS:
+
+  No residual correlations.
+
 
 
 OUTCOME MODEL ESTIMATES:
@@ -132,16 +153,16 @@ Parameters                           Median     StdDev       2.5%      97.5%    
                                 -------------------------------------------------------------------
 Variances:                      
   L2 : Var(Intercept)                 0.858      0.553      0.072      2.248      1.004    246.377 
-  L2 : Cov(lmx,Intercept)            -0.039      0.156     -0.342      0.285      1.002    523.276 
+  L2 : Cov(lmx,Intercept)            -0.039      0.156     -0.343      0.285      1.002    523.276 
   L2 : Var(lmx)                       0.184      0.089      0.049      0.394      1.005    521.620 
-  Residual Var.                      12.043      0.907     10.419     13.991      1.001   2778.417 
+  Residual Var.                      12.043      0.907     10.419     13.990      1.001   2778.417 
 
 Coefficients:                   
-  Intercept                          26.823      0.936     25.022     28.692      1.000   2899.786 
+  Intercept                          26.823      0.936     25.022     28.691      1.000   2899.786 
   lmx                                 0.657      0.082      0.494      0.816      1.001   3670.629 
   lmx.mean[team]                      0.138      0.349     -0.650      0.743      1.001    773.564 
   climate                             0.204      0.063      0.080      0.326      1.000   2731.679 
-  male                                1.714      0.331      1.070      2.368      1.000  10187.197 
+  male                                1.714      0.331      1.069      2.368      1.000  10187.197 
   cohesion                            0.200      0.181     -0.163      0.553      1.000   2711.492 
   lmx*climate                         0.040      0.019      0.002      0.078      1.000   3454.621 
   lmx.mean[team]*climate             -0.024      0.078     -0.184      0.129      1.003   1159.199 
@@ -168,23 +189,23 @@ Proportion Variance Explained
 Conditional Effects                  Median     StdDev       2.5%      97.5%        PSR      N_Eff 
                                 -------------------------------------------------------------------
   lmx | climate @ +2 SD                                                                            
-    Intercept                        28.518      1.303     25.989     31.125      1.000   2656.248 
-    Slope                             0.988      0.180      0.637      1.349      1.000   3799.126 
+    Intercept                        28.518      1.303     25.987     31.125      1.000   2656.248 
+    Slope                             0.988      0.180      0.637      1.348      1.000   3799.126 
                                                                                                    
   lmx | climate @ +1 SD                                                                            
-    Intercept                        27.669      1.101     25.548     29.866      1.000   2733.544 
+    Intercept                        27.669      1.101     25.547     29.866      1.000   2733.544 
     Slope                             0.823      0.114      0.601      1.051      1.000   3885.297 
                                                                                                    
   lmx | climate @ 0                                                                                
-    Intercept                        26.823      0.936     25.022     28.692      1.000   2899.786 
+    Intercept                        26.823      0.936     25.022     28.691      1.000   2899.786 
     Slope                             0.657      0.082      0.494      0.816      1.001   3670.629 
                                                                                                    
   lmx | climate @ -1 SD                                                                            
-    Intercept                        25.980      0.829     24.369     27.630      1.000   3257.759 
+    Intercept                        25.980      0.829     24.369     27.629      1.000   3257.759 
     Slope                             0.492      0.115      0.261      0.713      1.001   3505.632 
                                                                                                    
   lmx | climate @ -2 SD                                                                            
-    Intercept                        25.132      0.804     23.560     26.716      1.000   3772.451 
+    Intercept                        25.132      0.804     23.559     26.715      1.000   3772.451 
     Slope                             0.325      0.182     -0.039      0.675      1.001   3530.878 
                                                                                                    
                                 -------------------------------------------------------------------
@@ -219,7 +240,7 @@ Level 1:
 Level 2:                                                                                           
   climate                             0.022      0.042     -0.060      0.102      1.000   1802.728 
   cohesion                           -0.084      0.130     -0.344      0.168      1.001   1330.463 
-  Residual Var.                       1.003      0.371      0.365      1.825      1.003    504.101 
+  Residual Var.                       1.003      0.371      0.364      1.825      1.003    504.101 
                                                                                                    
                                 -------------------------------------------------------------------
 
@@ -230,12 +251,12 @@ Missing predictor:  climate
 Parameters                           Median     StdDev       2.5%      97.5%        PSR      N_Eff 
                                 -------------------------------------------------------------------
 
-Grand Mean                           20.114      0.421     19.281     20.936      1.002   1883.195 
+Grand Mean                           20.114      0.421     19.280     20.936      1.002   1883.195 
 
 Level 2:                                                                                           
-  lmx                                 0.299      0.649     -0.904      1.653      1.000   1318.754 
+  lmx                                 0.299      0.649     -0.905      1.652      1.000   1318.754 
   cohesion                            1.348      0.299      0.764      1.938      1.000   7315.501 
-  Residual Var.                      13.408      2.073     10.152     18.169      1.000   9183.147 
+  Residual Var.                      13.408      2.073     10.152     18.167      1.000   9183.147 
                                                                                                    
                                 -------------------------------------------------------------------
 
@@ -251,7 +272,7 @@ Grand Mean                            4.907      0.138      4.634      5.177    
 Level 2:                                                                                           
   lmx                                -0.127      0.216     -0.597      0.274      1.001   1026.971 
   climate                             0.146      0.032      0.083      0.207      1.000  10417.122 
-  Residual Var.                       1.467      0.226      1.098      1.985      1.000   8203.881 
+  Residual Var.                       1.467      0.226      1.097      1.985      1.000   8203.881 
                                                                                                    
                                 -------------------------------------------------------------------
 
